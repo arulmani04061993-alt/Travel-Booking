@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly — Luxury Travel Booking</title>
+
+  <!-- SEO & Social Meta -->
+  <meta name="description"
+    content="Discover extraordinary destinations, handpicked five-star hotels, bespoke villas, and exclusive travel experiences worldwide with Stackly.">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9kcIE9m78VW07oEE3NVTW9kit7464SVOlw42hzUJuBRoMvJ5Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+  <!-- =========================================================================
+       1. Header & Navigation
+       ========================================================================= -->
+  <header class="header">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo" aria-label="STACKLY Travel Homepage">
+        <img src="assets/images/logo/stackly-logo.webp" alt="STACKLY" class="brand-logo-img">
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#destinations" class="nav-link">Destinations</a></li>
+          <li><a href="#hotels" class="nav-link">Featured Hotels</a></li>
+          <li><a href="#offers" class="nav-link">Offers</a></li>
+          <li><a href="#why-us" class="nav-link">Why Choose Us</a></li>
+          <li><a href="#pricing" class="nav-link">Membership & Pricing</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Wishlist & Mobile Toggle) -->
+      <div class="nav-actions">
+        <button class="wishlist-btn-trigger" id="openWishlistBtn" aria-label="Open Saved Wishlist">
+          <i class="fa-solid fa-heart"></i>
+          <span class="wishlist-count-badge">0</span>
+        </button>
+
+        <a href="#hotels" class="btn btn-primary btn-sm"
+          style="display: none; @media(min-width: 900px){display: inline-flex;}">
+          <span>Explore Stays</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         2. Hero Section with Destination Search
+         ========================================================================= -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+          <div class="hero-tagline">
+            <i class="fa-solid fa-crown"></i> Curated Luxury Travel & Retreats
+          </div>
+          <h1 class="hero-title">
+            <span class="gradient-text">Where Elegance Meets</span> <br>
+            <span class="gradient-text">Extraordinary Escapes</span>
+          </h1>
+          <p class="hero-description">
+            Discover handpicked 5-star sanctuaries, private overwater villas, and bespoke journeys designed for
+            discerning travelers across the world's most alluring destinations.
+          </p>
+        </div>
+
+        <!-- Live Destination Search & Dynamic Pricing Engine -->
+        <div class="hero-search-wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div class="search-tabs">
+            <button class="search-tab active" type="button">
+              <i class="fa-solid fa-hotel"></i> Stays & Resorts
+            </button>
+            <a href="404.html" class="search-tab" style="text-decoration: none;">
+              <i class="fa-solid fa-umbrella-beach"></i> Luxury Villas
+            </a>
+            <a href="404.html" class="search-tab" style="text-decoration: none;">
+              <i class="fa-solid fa-sailboat"></i> Private Charters
+            </a>
+          </div>
+
+          <form id="heroSearchForm" class="search-form-grid">
+            <!-- Destination Field -->
+            <div class="search-field">
+              <span class="field-label">
+                <i class="fa-solid fa-location-dot"></i> Destination
+              </span>
+              <input type="text" id="searchDestination" class="field-input"
+                placeholder="Where do you wish to escape? (e.g., Paris, Bali)">
+            </div>
+
+            <!-- Check-In Field -->
+            <div class="search-field">
+              <span class="field-label">
+                <i class="fa-regular fa-calendar-check"></i> Check-In
+              </span>
+              <input type="date" id="searchCheckIn" class="field-input" required>
+            </div>
+
+            <!-- Check-Out Field -->
+            <div class="search-field">
+              <span class="field-label">
+                <i class="fa-regular fa-calendar-xmark"></i> Check-Out
+              </span>
+              <input type="date" id="searchCheckOut" class="field-input" required>
+            </div>
+
+            <!-- Guests & Rooms Field (Interactive Popover) -->
+            <div class="search-field" style="position: relative;">
+              <span class="field-label">
+                <i class="fa-solid fa-user-group"></i> Guests & Rooms
+              </span>
+              <div class="guest-selector-toggle" id="guestSelectTrigger">
+                <span id="guestDisplayValue">2 Guests, 1 Room</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+              </div>
+
+              <!-- Guest Popover Dropdown -->
+              <div class="guest-popover" id="guestPopover">
+                <!-- Adults -->
+                <div class="counter-row">
+                  <div class="counter-info">
+                    <h4>Adults</h4>
+                    <p>Ages 13 and above</p>
+                  </div>
+                  <div class="counter-controls">
+                    <button type="button" class="counter-btn" data-type="adults" data-action="minus"
+                      aria-label="Decrease Adults">-</button>
+                    <span class="counter-value" data-type="adults">2</span>
+                    <button type="button" class="counter-btn" data-type="adults" data-action="plus"
+                      aria-label="Increase Adults">+</button>
+                  </div>
+                </div>
+
+                <!-- Children -->
+                <div class="counter-row">
+                  <div class="counter-info">
+                    <h4>Children</h4>
+                    <p>Ages 0 to 12</p>
+                  </div>
+                  <div class="counter-controls">
+                    <button type="button" class="counter-btn" data-type="children" data-action="minus" disabled
+                      aria-label="Decrease Children">-</button>
+                    <span class="counter-value" data-type="children">0</span>
+                    <button type="button" class="counter-btn" data-type="children" data-action="plus"
+                      aria-label="Increase Children">+</button>
+                  </div>
+                </div>
+
+                <!-- Rooms -->
+                <div class="counter-row">
+                  <div class="counter-info">
+                    <h4>Rooms</h4>
+                    <p>Suites & villas</p>
+                  </div>
+                  <div class="counter-controls">
+                    <button type="button" class="counter-btn" data-type="rooms" data-action="minus" disabled
+                      aria-label="Decrease Rooms">-</button>
+                    <span class="counter-value" data-type="rooms">1</span>
+                    <button type="button" class="counter-btn" data-type="rooms" data-action="plus"
+                      aria-label="Increase Rooms">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="search-btn-wrapper">
+              <button type="submit" class="btn btn-primary" style="height: 100%; min-height: 52px; padding: 0 32px;">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+          </form>
+
+          <!-- Dynamic Booking Price Estimation Bar -->
+          <div class="booking-estimate-bar" id="livePriceEstimate">
+            <!-- Computed dynamically via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. Popular Destinations Section
+         ========================================================================= -->
+    <section class="section destinations-section" id="destinations">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Trending Getaways</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Popular Destinations</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            Explore world-renowned sanctuaries selected for their captivating culture, untouched landscapes, and supreme
+            luxury.
+          </p>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="filter-pills-bar" data-aos="fade-up" data-aos-delay="100">
+          <button class="filter-pill dest-filter-btn active" data-filter="all">All Destinations</button>
+          <button class="filter-pill dest-filter-btn" data-filter="island">Islands & Atolls</button>
+          <button class="filter-pill dest-filter-btn" data-filter="cultural">Cultural Heritage</button>
+          <button class="filter-pill dest-filter-btn" data-filter="beach">Tropical Beaches</button>
+          <button class="filter-pill dest-filter-btn" data-filter="mountain">Alpine Escapes</button>
+          <button class="filter-pill dest-filter-btn" data-filter="urban">Urban Capitals</button>
+        </div>
+
+        <!-- Destinations Grid -->
+        <div class="destinations-grid" id="destinationsGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. Featured Hotels & Interactive Filtering Section
+         ========================================================================= -->
+    <section class="section hotels-section" id="hotels">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" data-aos="fade-up" data-aos-delay="100">World-Class Stays</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Featured Hotels & Luxury Resorts</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            Hand-selected properties meeting our uncompromising 80-point standard for architecture, privacy, gastronomy,
+            and hospitality.
+          </p>
+        </div>
+
+        <!-- Filter & Sorting Control Bar -->
+        <div class="hotels-control-panel" data-aos="fade-up">
+          <div class="filter-group-left">
+            <!-- Property Type Select -->
+            <select id="hotelTypeSelect" class="filter-select" aria-label="Filter by property type">
+              <option value="all">All Property Types</option>
+              <option value="Resort">Resorts</option>
+              <option value="Hotel">Luxury Hotels</option>
+              <option value="Villa">Private Villas</option>
+              <option value="Boutique">Boutique Stays</option>
+              <option value="Chalet">Alpine Chalets</option>
+              <option value="Overwater Villa">Overwater Villas</option>
+            </select>
+
+            <!-- Price Range Filter Slider -->
+            <div class="price-range-filter">
+              <span>Max Price:</span>
+              <input type="range" id="priceRangeSlider" min="100" max="600" step="25" value="600"
+                aria-label="Filter by max price">
+              <strong id="priceRangeValue" style="color:var(--primary);">$600</strong>
+            </div>
+
+            <!-- Sorting Select -->
+            <select id="hotelSortSelect" class="filter-select" aria-label="Sort hotels">
+              <option value="popular">Sort: Most Popular</option>
+              <option value="rating">Sort: Highest Rating</option>
+              <option value="price-low">Sort: Price (Low to High)</option>
+              <option value="price-high">Sort: Price (High to Low)</option>
+            </select>
+          </div>
+
+          <div class="results-count" id="hotelsResultsCount">
+            Showing 15 luxury stays
+          </div>
+        </div>
+
+        <!-- Hotels Grid -->
+        <div class="hotels-grid" id="hotelsGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. Special Offers & Promo Codes Section
+         ========================================================================= -->
+    <section class="section offers-section" id="offers">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Exclusive Privileges</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Special Offers & Deals</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            Unlock seasonal discounts, complimentary upgrade credits, and VIP vouchers for your upcoming luxury getaway.
+          </p>
+        </div>
+
+        <!-- Promotional Cards Grid -->
+        <div class="offers-grid" id="offersGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. Why Choose Us Section
+         ========================================================================= -->
+    <section class="section why-us-section" id="why-us">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" style="background: rgba(212,175,55,0.2); color:#f59e0b;" data-aos="fade-up" data-aos-delay="100">The Stackly
+            Distinction</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Why Travel With Us</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            We curate beyond the ordinary to make every trip a masterclass in personalized, effortless luxury.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box" data-aos="fade-right" data-aos-delay="0" data-aos-duration="850">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-gem"></i>
+            </div>
+            <h3 class="feature-title">Handpicked Luxury Portfolio</h3>
+            <p class="feature-desc">
+              Every hotel, resort, and chalet undergoes a rigorous 80-point quality audit covering architectural design,
+              comfort, privacy, and impeccable service standards.
+            </p>
+          </div>
+
+          <div class="feature-box" data-aos="fade-right" data-aos-delay="150" data-aos-duration="850">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="feature-title">Best Price Guarantee</h3>
+            <p class="feature-desc">
+              Direct partnerships with prestigious hospitality brands enable guaranteed best direct prices with zero
+              hidden platform booking fees or surcharges.
+            </p>
+          </div>
+
+          <div class="feature-box" data-aos="fade-left" data-aos-delay="200" data-aos-duration="850">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="feature-title">24/7 Dedicated Concierge</h3>
+            <p class="feature-desc">
+              Your personal travel architect is available anytime via chat or phone to arrange helicopter transfers,
+              private dining, or customized excursions.
+            </p>
+          </div>
+
+          <div class="feature-box" data-aos="fade-left" data-aos-delay="350" data-aos-duration="850">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-rotate-left"></i>
+            </div>
+            <h3 class="feature-title">Risk-Free Cancellation</h3>
+            <p class="feature-desc">
+              Travel with peace of mind thanks to 100% refundable bookings up to 48 hours prior to check-in on
+              participating luxury properties.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. VIP Membership & Pricing Plans Section
+         ========================================================================= -->
+    <section class="section pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Bespoke Privileges</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Exclusive Membership & Pricing</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            Elevate every journey with dedicated 24/7 personal travel architects, guaranteed suite upgrades, airport limousine transfers, and secret seasonal rates.
+          </p>
+        </div>
+
+        <div class="pricing-cards-grid">
+          <!-- Tier 1: Explorer Tier -->
+          <div class="pricing-card" data-aos="fade-right" data-aos-duration="850">
+            <div class="pricing-tier-header">
+              <span class="pricing-tier-badge">Voyager</span>
+              <h3 class="pricing-tier-title">Silver Escapes</h3>
+              <p class="pricing-tier-desc">Ideal for occasional luxury vacationers seeking verified five-star stays and best direct rates.</p>
+              <div class="pricing-figure">
+                <span class="currency">$</span>
+                <span class="amount">199</span>
+                <span class="period">/ year</span>
+              </div>
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Verified 5-Star Hotel Portfolio Access</li>
+              <li><i class="fa-solid fa-circle-check"></i> Best Price Match Guarantee</li>
+              <li><i class="fa-solid fa-circle-check"></i> Free Daily Gourmet Breakfast</li>
+              <li><i class="fa-solid fa-circle-check"></i> Standard Priority Customer Care</li>
+              <li class="disabled"><i class="fa-regular fa-circle-xmark"></i> Dedicated 24/7 VIP Concierge</li>
+              <li class="disabled"><i class="fa-regular fa-circle-xmark"></i> Private Yacht & Jet Transfers</li>
+            </ul>
+
+            <a href="404.html" class="btn btn-outline-pricing">
+              Choose Silver Plan <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Tier 2: Signature Gold Tier (Featured) -->
+          <div class="pricing-card featured" data-aos="fade-up" data-aos-duration="850">
+            <div class="pricing-ribbon-tag">Most Popular Choice</div>
+            <div class="pricing-tier-header">
+              <span class="pricing-tier-badge gold">Black & Gold</span>
+              <h3 class="pricing-tier-title">Gold Prestige</h3>
+              <p class="pricing-tier-desc">Our flagship membership designed for avid globetrotters demanding seamless white-glove hospitality.</p>
+              <div class="pricing-figure">
+                <span class="currency">$</span>
+                <span class="amount">499</span>
+                <span class="period">/ year</span>
+              </div>
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-features-list">
+              <li><i class="fa-solid fa-circle-check gold-icon"></i> Guaranteed Room & Villa Category Upgrades</li>
+              <li><i class="fa-solid fa-circle-check gold-icon"></i> $250 Annual Luxury Resort & Spa Credit</li>
+              <li><i class="fa-solid fa-circle-check gold-icon"></i> 24/7 Dedicated Personal Travel Architect</li>
+              <li><i class="fa-solid fa-circle-check gold-icon"></i> VIP Airport Limousine Chauffeur Service</li>
+              <li><i class="fa-solid fa-circle-check gold-icon"></i> Flexible Cancellation up to 24 Hours</li>
+              <li class="disabled"><i class="fa-regular fa-circle-xmark"></i> Unlimited Private Island Buyouts</li>
+            </ul>
+
+            <a href="404.html" class="btn btn-primary-pricing">
+              Join Gold Prestige <i class="fa-solid fa-crown"></i>
+            </a>
+          </div>
+
+          <!-- Tier 3: Elite Diamond Tier -->
+          <div class="pricing-card" data-aos="fade-left" data-aos-duration="850">
+            <div class="pricing-tier-header">
+              <span class="pricing-tier-badge cyan">Private Elite</span>
+              <h3 class="pricing-tier-title">Diamond Royal</h3>
+              <p class="pricing-tier-desc">Uncapped ultra-luxury privilege for billionaires, royal entourages, and high-net-worth families.</p>
+              <div class="pricing-figure">
+                <span class="currency">$</span>
+                <span class="amount">1,299</span>
+                <span class="period">/ year</span>
+              </div>
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Unlimited Private Jet & Superyacht Charters</li>
+              <li><i class="fa-solid fa-circle-check"></i> Exclusive Private Island & Chateau Access</li>
+              <li><i class="fa-solid fa-circle-check"></i> $1,000 Michelin Dining & Wine Cellar Credit</li>
+              <li><i class="fa-solid fa-circle-check"></i> Private Security Escort & Helipad Booking</li>
+              <li><i class="fa-solid fa-circle-check"></i> 100% Zero-Penalty Lifetime Cancellation</li>
+              <li><i class="fa-solid fa-circle-check"></i> Bespoke Itinerary Design by Certified Specialists</li>
+            </ul>
+
+            <a href="404.html" class="btn btn-outline-pricing">
+              Inquire Diamond Royal <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. Customer Testimonials Section
+         ========================================================================= -->
+    <section class="section testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="850">
+          <span class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Guest Stories</span>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">What Our Travelers Say</h2>
+          <p class="section-desc" data-aos="fade-up" data-aos-delay="300">
+            Real feedback from globetrotters, architects, and honeymooners who curated their dream getaways with
+            Stackly.
+          </p>
+        </div>
+
+        <div class="testimonials-slider-container" data-aos="fade-up">
+          <div class="slider-track-window">
+            <div class="slider-track" id="testimonialTrack">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-controls">
+            <button class="slider-arrow-btn" id="prevTestimonialBtn" aria-label="Previous Testimonial">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div class="slider-dots" id="sliderDots">
+              <!-- Dots rendered by app.js -->
+            </div>
+            <button class="slider-arrow-btn" id="nextTestimonialBtn" aria-label="Next Testimonial">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. Newsletter Subscription Section
+         ========================================================================= -->
+    <section class="newsletter-section" id="newsletter">
+      <div class="container">
+        <div class="newsletter-banner" data-aos="fade-up" data-aos-duration="900">
+          <span class="section-subtitle" style="background: rgba(212,175,55,0.2); color:#f59e0b; margin-bottom:16px;" data-aos="fade-up" data-aos-delay="100">
+            <i class="fa-regular fa-envelope"></i> VIP Travel Club
+          </span>
+          <h2 class="newsletter-title" data-aos="fade-up" data-aos-delay="200">Unlock Exclusive Luxury Travel Invitations</h2>
+          <p class="newsletter-desc" data-aos="fade-up" data-aos-delay="300">
+            Receive private travel insights, unlisted seasonal suites, secret promo codes, and luxury destination
+            inspiration straight to your inbox.
+          </p>
+
+          <form id="newsletterForm" class="newsletter-form" novalidate>
+            <input type="email" id="newsletterEmail" class="newsletter-input"
+              placeholder="Enter your luxury email address..." required>
+            <button type="submit" class="btn btn-primary">
+              Subscribe Now <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+
+          <div class="newsletter-status-msg" id="newsletterStatus"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       9. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand">
+          <a href="#hero" class="brand-logo" aria-label="STACKLY Travel Homepage">
+            <img src="assets/images/logo/stackly-logo.webp" alt="STACKLY" class="brand-logo-img">
+          </a>
+          <p class="footer-bio">
+            Pioneering luxury travel discovery with handpicked 5-star hotels, overwater retreats, and bespoke concierge
+            experiences worldwide.
+          </p>
+          <div class="social-links">
+            <a href="404.html" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="404.html" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="404.html" class="social-btn" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="404.html" class="social-btn" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="404.html" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Destinations -->
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <ul class="footer-links">
+            <li><a href="#destinations" onclick="handleDestinationClick('Santorini')">Santorini, Greece</a></li>
+            <li><a href="#destinations" onclick="handleDestinationClick('Kyoto & Tokyo')">Tokyo & Kyoto, Japan</a></li>
+            <li><a href="#destinations" onclick="handleDestinationClick('Bali')">Bali, Indonesia</a></li>
+            <li><a href="#destinations" onclick="handleDestinationClick('Maldives')">The Maldives</a></li>
+            <li><a href="#destinations" onclick="handleDestinationClick('Zermatt & Alps')">Swiss Alps</a></li>
+            <li><a href="#destinations" onclick="handleDestinationClick('Paris')">Paris, France</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company & Experiences -->
+        <div class="footer-col">
+          <h4>Experiences</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Overwater Bungalows</a></li>
+            <li><a href="404.html">Ski-In Alpine Chalets</a></li>
+            <li><a href="404.html">Rainforest Eco-Sanctuaries</a></li>
+            <li><a href="#offers">Honeymoon Escapes</a></li>
+            <li><a href="404.html">Private Yacht Charters</a></li>
+            <li><a href="#why-us">Concierge Membership</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter -->
+        <div class="footer-col footer-newsletter-col">
+          <h4 class="footer-newsletter-heading">NEWSLETTER</h4>
+          <p class="footer-newsletter-text">
+            Subscribe to receive exclusive travel insights, curated destination updates, and Stackly luxury offers.
+          </p>
+          <form id="footerNewsletterForm" class="footer-newsletter-capsule" novalidate>
+            <input type="email" id="footerNewsletterEmail" class="footer-newsletter-input-field" placeholder="Email Address" required>
+            <button type="submit" class="footer-newsletter-submit-btn">Subscribe</button>
+          </form>
+          <div class="footer-newsletter-feedback" id="footerNewsletterStatus"></div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Stackly Travel Booking
+        </div>
+        <div style="display:flex; gap:20px;">
+          <span>English (US)</span>
+          <span>USD ($)</span>
+          <span>Security Verified <i class="fa-solid fa-lock" style="color:var(--accent);"></i></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. Saved Stays / Wishlist Slide Drawer
+       ========================================================================= -->
+  <div class="modal-overlay" id="wishlistModal">
+    <div class="wishlist-drawer">
+      <div class="drawer-header">
+        <h3><i class="fa-solid fa-heart" style="color:#ef4444;"></i> Saved Wishlist</h3>
+        <button class="drawer-close-btn" id="closeWishlistBtn" aria-label="Close Wishlist Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="drawer-body" id="wishlistItemsContainer">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AOS (Animate On Scroll) JS Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Data & Application Logic -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>
